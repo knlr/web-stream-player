@@ -55,9 +55,6 @@ struct ContentView: View {
     @State private var sheetIsPresented = false
     @State private var selection: Stream?
 
-    init() {
-        reloadStreams()
-    }
 
     var body: some View {
         VStack {
@@ -66,9 +63,8 @@ struct ContentView: View {
             }
             .sheet(isPresented: $sheetIsPresented){
                 AddNewStreamForm()
-            }.onDisappear(){
-                reloadStreams()
             }
+
             List(selection: $selection) {
                 ForEach(streams) { stream in
                     Text(stream.name).onTapGesture {
@@ -85,14 +81,24 @@ struct ContentView: View {
                     onPlayPauseButtonPressed()
                 }
             }
-        }
+        }.onAppear(perform: {
+            reloadStreams()
+        })
     }
 
 
-    private func reloadStreams() {
+     private func reloadStreams() {
 
         let streamsData = UserDefaults.standard.data(forKey: "streams") ?? Data()
-        streams = (try? PropertyListDecoder().decode([Stream].self, from: streamsData)) ?? []
+        do {
+            streams = (try PropertyListDecoder().decode([Stream].self, from: streamsData))
+        }
+        catch (let error)
+        {
+            streams = []
+            print(error)
+        }
+        ()
     }
 
     private func onPlayPauseButtonPressed() {
