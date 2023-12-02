@@ -7,6 +7,7 @@
 
 import SwiftUI
 import AVFoundation
+import MediaPlayer
 
 struct Stream : Hashable, Codable {
     let url: URL
@@ -120,8 +121,10 @@ struct ContentView: View {
         case .paused:
             player.play()
             playState = .playing
+            try? AVAudioSession.sharedInstance().setActive(true)
         case .playing:
             player.pause()
+            try? AVAudioSession.sharedInstance().setActive(false)
             playState = .paused
         default: ()
         }
@@ -129,10 +132,28 @@ struct ContentView: View {
 
     private func onStreamSelected(stream: Stream) {
 
+         do {
+             let session = AVAudioSession.sharedInstance()
+             try session.setCategory(.playback, mode: .default, options: [.duckOthers, .allowBluetooth, .allowAirPlay, .allowBluetoothA2DP])
+             try session.setActive(true)
+         } catch {
+             // Handle error.
+         }
+        
+        let rcc = MPRemoteCommandCenter.shared()
+        rcc.togglePlayPauseCommand.isEnabled = true
+        rcc.togglePlayPauseCommand.addTarget { event in
+            
+            onPlayPauseButtonPressed()
+            return .success
+        }
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = [MPMediaItemPropertyTitle: stream.name]
+
         player.replaceCurrentItem(with: AVPlayerItem(url: stream.url))
         player.play()
         playState = .playing
     }
+    
 }
 
 struct ContentView_Previews: PreviewProvider {
