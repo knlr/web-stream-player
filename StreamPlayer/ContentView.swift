@@ -71,10 +71,19 @@ struct ContentView: View {
 
             List(selection: $selection) {
                 ForEach(streams) { stream in
-                    Text(stream.name).onTapGesture {
+                    Text(stream.name)
+                    .onTapGesture {
                         selection = stream
                         onStreamSelected(stream: stream)
                     }
+                }
+                .onDelete { index in
+                    guard let first = index.first else { return }
+                    let streamsData = UserDefaults.standard.data(forKey: "streams") ?? Data()
+                    var streamsArray = (try? PropertyListDecoder().decode([Stream].self, from: streamsData)) ?? []
+                    streamsArray.remove(at: first)
+                    UserDefaults.standard.setValue(try! PropertyListEncoder().encode(streamsArray), forKey: "streams")
+                    reloadStreams()
                 }
             }
             if let selection = selection, playState != .stopped {
