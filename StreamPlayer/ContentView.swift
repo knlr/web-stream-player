@@ -61,7 +61,11 @@ struct ContentView: View {
             Button("Add") {
                 sheetIsPresented = true
             }
-            .sheet(isPresented: $sheetIsPresented){
+            .sheet(isPresented: $sheetIsPresented,
+                   onDismiss: {
+                reloadStreams()
+
+            }){
                 AddNewStreamForm()
             }
 
