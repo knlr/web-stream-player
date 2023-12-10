@@ -72,7 +72,13 @@ struct ContentView: View {
 
             List(selection: $selection) {
                 ForEach(streams) { stream in
-                    Text(stream.name)
+                    HStack {
+                        let margin: CGFloat = 30
+                        Spacer().frame(minWidth: margin, maxWidth: margin)
+                        Text(stream.name)
+                        Spacer()
+                    }
+                    .contentShape(Rectangle())
                     .onTapGesture {
                         selection = stream
                         onStreamSelected(stream: stream)
