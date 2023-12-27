@@ -9,41 +9,6 @@ import SwiftUI
 import AVFoundation
 import MediaPlayer
 
-struct Stream : Hashable, Codable {
-    let url: URL
-    let name: String
-}
-
-extension Stream : Identifiable {
-    var id: String {
-        return url.absoluteString
-    }
-}
-
-struct AddNewStreamForm : View {
-
-    @Environment(\.presentationMode) var presentationMode
-
-    @State var name = ""
-    @State var url = ""
-    var body: some View {
-
-        VStack {
-            TextField("URL", text: $url)
-            TextField("Name", text: $name)
-            Button("Add") {
-
-                guard !name.isEmpty, let url = URL(string: url) else { return }
-                let streamsData = UserDefaults.standard.data(forKey: "streams") ?? Data()
-                var streamsArray = (try? PropertyListDecoder().decode([Stream].self, from: streamsData)) ?? []
-                streamsArray.append(Stream(url: url, name: name))
-                UserDefaults.standard.setValue(try! PropertyListEncoder().encode(streamsArray), forKey: "streams")
-                presentationMode.wrappedValue.dismiss()
-            }
-        }
-    }
-}
-
 
 struct ContentView: View {
 
@@ -59,6 +24,8 @@ struct ContentView: View {
 
     var body: some View {
         VStack {
+            Spacer().frame(height: 44)
+            
             Button("Add") {
                 sheetIsPresented = true
             }
@@ -86,10 +53,7 @@ struct ContentView: View {
                 }
                 .onDelete { index in
                     guard let first = index.first else { return }
-                    let streamsData = UserDefaults.standard.data(forKey: "streams") ?? Data()
-                    var streamsArray = (try? PropertyListDecoder().decode([Stream].self, from: streamsData)) ?? []
-                    streamsArray.remove(at: first)
-                    UserDefaults.standard.setValue(try! PropertyListEncoder().encode(streamsArray), forKey: "streams")
+                    StreamsRepository.shared.deleteStream(at: first)
                     reloadStreams()
                 }
             }
@@ -108,15 +72,7 @@ struct ContentView: View {
 
      private func reloadStreams() {
 
-        let streamsData = UserDefaults.standard.data(forKey: "streams") ?? Data()
-        do {
-            streams = (try PropertyListDecoder().decode([Stream].self, from: streamsData))
-        }
-        catch (let error)
-        {
-            streams = []
-            print(error)
-        }
+         streams = StreamsRepository.shared.streams
          let rcc = MPRemoteCommandCenter.shared()
          rcc.togglePlayPauseCommand.isEnabled = true
          rcc.nextTrackCommand.isEnabled = !streams.isEmpty

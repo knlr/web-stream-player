@@ -13,6 +13,10 @@
 		726EE881290534A30020C313 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 726EE880290534A30020C313 /* Assets.xcassets */; };
 		726EE884290534A30020C313 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 726EE883290534A30020C313 /* Preview Assets.xcassets */; };
 		726EE887290534A30020C313 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 726EE885290534A30020C313 /* LaunchScreen.storyboard */; };
+		72B9579B2B3C87E800C5139A /* AddNewStreamForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B9579A2B3C87E800C5139A /* AddNewStreamForm.swift */; };
+		72B9579D2B3C882300C5139A /* Stream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B9579C2B3C882300C5139A /* Stream.swift */; };
+		72B9579F2B3C891F00C5139A /* StreamsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B9579E2B3C891F00C5139A /* StreamsRepository.swift */; };
+		72B957A12B3C912C00C5139A /* StreamPlayerEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B957A02B3C912C00C5139A /* StreamPlayerEngine.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +28,10 @@
 		726EE883290534A30020C313 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		726EE886290534A30020C313 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		726EE888290534A30020C313 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		72B9579A2B3C87E800C5139A /* AddNewStreamForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewStreamForm.swift; sourceTree = "<group>"; };
+		72B9579C2B3C882300C5139A /* Stream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stream.swift; sourceTree = "<group>"; };
+		72B9579E2B3C891F00C5139A /* StreamsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamsRepository.swift; sourceTree = "<group>"; };
+		72B957A02B3C912C00C5139A /* StreamPlayerEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamPlayerEngine.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +67,10 @@
 				726EE87A290534A00020C313 /* AppDelegate.swift */,
 				726EE87C290534A00020C313 /* SceneDelegate.swift */,
 				726EE87E290534A00020C313 /* ContentView.swift */,
+				72B9579A2B3C87E800C5139A /* AddNewStreamForm.swift */,
+				72B9579C2B3C882300C5139A /* Stream.swift */,
+				72B9579E2B3C891F00C5139A /* StreamsRepository.swift */,
+				72B957A02B3C912C00C5139A /* StreamPlayerEngine.swift */,
 				726EE880290534A30020C313 /* Assets.xcassets */,
 				726EE885290534A30020C313 /* LaunchScreen.storyboard */,
 				726EE888290534A30020C313 /* Info.plist */,
@@ -145,9 +157,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72B957A12B3C912C00C5139A /* StreamPlayerEngine.swift in Sources */,
+				72B9579B2B3C87E800C5139A /* AddNewStreamForm.swift in Sources */,
 				726EE87B290534A00020C313 /* AppDelegate.swift in Sources */,
 				726EE87D290534A00020C313 /* SceneDelegate.swift in Sources */,
+				72B9579F2B3C891F00C5139A /* StreamsRepository.swift in Sources */,
 				726EE87F290534A00020C313 /* ContentView.swift in Sources */,
+				72B9579D2B3C882300C5139A /* Stream.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,6 +307,7 @@
 				DEVELOPMENT_TEAM = GDYH754BNE;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = StreamPlayer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -312,6 +329,7 @@
 				DEVELOPMENT_TEAM = GDYH754BNE;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = StreamPlayer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
