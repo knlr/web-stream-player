@@ -6,15 +6,23 @@
 //
 
 import Foundation
+import MediaPlayer
+
 
 internal class StreamsRepository {
-    
+ 
     internal static let shared = StreamsRepository()
     
     internal var streams: [Stream] {
         
         let streamsData = UserDefaults.standard.data(forKey: userDefaultsKey) ?? Data()
-        return (try? PropertyListDecoder().decode([Stream].self, from: streamsData)) ?? []
+        let streams = (try? PropertyListDecoder().decode([Stream].self, from: streamsData)) ?? []
+        if !streamsLoadedOnce {
+            
+            updateRCCSkipButtons(streams: streams)
+            streamsLoadedOnce = true
+        }
+        return streams
     }
     
     internal func appendStream(_ stream: Stream) {
@@ -33,13 +41,22 @@ internal class StreamsRepository {
     }
     
     private let userDefaultsKey = "streams"
+    private var streamsLoadedOnce = false
 }
 
 
 private extension StreamsRepository {
     
-    func saveStreams( _ streams: [Stream]) {
+    func updateRCCSkipButtons(streams: [Stream]){
         
+        let rcc = MPRemoteCommandCenter.shared()
+        rcc.nextTrackCommand.isEnabled = streams.count > 1
+        rcc.previousTrackCommand.isEnabled = streams.count > 1
+    }
+    
+    func saveStreams( _ streams: [Stream]) {
+                
+        updateRCCSkipButtons(streams: streams)
         UserDefaults.standard.setValue(try! PropertyListEncoder().encode(streams), forKey: userDefaultsKey)
    }
 }

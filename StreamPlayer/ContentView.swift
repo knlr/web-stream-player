@@ -12,27 +12,22 @@ import MediaPlayer
 
 struct ContentView: View {
 
-    private enum PlayState {
-        case stopped, paused, playing
-    }
-    @State private var playState: PlayState = .stopped
     @State private var streams: [Stream] = []
-    private var player = AVPlayer()
+    private var streamPlayerEngine = StreamPlayerEngine()
     @State private var sheetIsPresented = false
     @State private var selection: Stream?
     @State private var audioInitialised = false
+    @State private var state: StreamPlayerEngine.PlayState = .stopped
 
     var body: some View {
         VStack {
-            Spacer().frame(height: 44)
-            
+            Spacer().frame(height: 20)
             Button("Add") {
                 sheetIsPresented = true
             }
             .sheet(isPresented: $sheetIsPresented,
                    onDismiss: {
                 reloadStreams()
-
             }){
                 AddNewStreamForm()
             }
@@ -40,7 +35,7 @@ struct ContentView: View {
             List(selection: $selection) {
                 ForEach(streams) { stream in
                     HStack {
-                        let margin: CGFloat = 30
+                        let margin: CGFloat = 15
                         Spacer().frame(minWidth: margin, maxWidth: margin)
                         Text(stream.name)
                         Spacer()
@@ -57,14 +52,17 @@ struct ContentView: View {
                     reloadStreams()
                 }
             }
-            if let selection = selection, playState != .stopped {
+            if let selection = selection, streamPlayerEngine.state != .stopped {
 
                 Text("now playing: \(selection.name)")
-                Button(playState == .playing ? "Pause" : "Resume") {
-                    onPlayPauseButtonPressed()
+                Button(state == .playing ? "Pause" : "Resume") {
+                    streamPlayerEngine.playPauseToggle()
                 }
             }
         }.onAppear(perform: {
+            streamPlayerEngine.onPlayStateUpdate = {
+                state = streamPlayerEngine.state
+            }
             reloadStreams()
         })
     }
@@ -73,74 +71,12 @@ struct ContentView: View {
      private func reloadStreams() {
 
          streams = StreamsRepository.shared.streams
-         let rcc = MPRemoteCommandCenter.shared()
-         rcc.togglePlayPauseCommand.isEnabled = true
-         rcc.nextTrackCommand.isEnabled = !streams.isEmpty
-         rcc.previousTrackCommand.isEnabled = !streams.isEmpty
-    }
-
-    private func onPlayPauseButtonPressed() {
-
-        switch playState {
-        case .paused:
-            player.play()
-            playState = .playing
-            try? AVAudioSession.sharedInstance().setActive(true)
-        case .playing:
-            player.pause()
-            try? AVAudioSession.sharedInstance().setActive(false)
-            playState = .paused
-        default: ()
-        }
     }
 
     private func onStreamSelected(stream: Stream) {
 
-        if !audioInitialised {
-            do {
-                let session = AVAudioSession.sharedInstance()
-                try session.setCategory(.playback, mode: .default, options: [.duckOthers, .allowBluetooth, .allowAirPlay, .allowBluetoothA2DP])
-                try session.setActive(true)
-            } catch {
-                // Handle error.
-            }
-            let rcc = MPRemoteCommandCenter.shared()
-            rcc.nextTrackCommand.addTarget { event in
-                
-                if let index = selection.flatMap(streams.firstIndex(of:)) {
-                    selection = streams[(index + 1) % streams.count]
-                    onStreamSelected(stream: selection!)
-                }
-                return .success
-            }
-
-            rcc.previousTrackCommand.addTarget { event in
-                
-                if var index = selection.flatMap(streams.firstIndex(of:)) {
-
-                    index = index == 0 ? streams.count - 1 : index - 1
-                    let stream =  streams[index]
-                    selection = stream
-                    onStreamSelected(stream: stream)
-                }
-                return .success
-            }
-
-            rcc.togglePlayPauseCommand.addTarget { event in
-                
-                onPlayPauseButtonPressed()
-                return .success
-            }
-            audioInitialised = true
-        }
-        MPNowPlayingInfoCenter.default().nowPlayingInfo = [MPMediaItemPropertyTitle: stream.name]
-        
-       
-        player.replaceCurrentItem(with: AVPlayerItem(url: stream.url))
-        player.play()
-        playState = .playing
+        streamPlayerEngine.play(stream: stream)
     }
-    
 }
 
 struct ContentView_Previews: PreviewProvider {
