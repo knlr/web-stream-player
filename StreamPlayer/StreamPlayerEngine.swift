@@ -23,15 +23,7 @@ internal class StreamPlayerEngine {
             onPlayStateUpdate()
         }
     }
-    init()
-    {
-        ()
-        
-    }
-    
-    deinit {
-        print(#function)
-    }
+
     
     internal func play(stream: Stream) {
         

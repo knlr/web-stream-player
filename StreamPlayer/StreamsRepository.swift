@@ -32,6 +32,13 @@ internal class StreamsRepository {
         saveStreams(streams)
     }
     
+    internal func move(from: IndexSet, to: Int) {
+        
+        var streams = self.streams
+        streams.move(fromOffsets: from, toOffset: to)
+        saveStreams(streams)
+    }
+    
     
     internal func deleteStream(at index: Int) {
         

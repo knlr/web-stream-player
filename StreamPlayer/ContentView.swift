@@ -11,27 +11,16 @@ import MediaPlayer
 
 
 struct ContentView: View {
-
+    
     @State private var streams: [Stream] = []
     private var streamPlayerEngine = StreamPlayerEngine()
     @State private var sheetIsPresented = false
     @State private var selection: Stream?
     @State private var audioInitialised = false
     @State private var state: StreamPlayerEngine.PlayState = .stopped
-
+    
     var body: some View {
-        VStack {
-            Spacer().frame(height: 20)
-            Button("Add") {
-                sheetIsPresented = true
-            }
-            .sheet(isPresented: $sheetIsPresented,
-                   onDismiss: {
-                reloadStreams()
-            }){
-                AddNewStreamForm()
-            }
-
+        NavigationStack {
             List(selection: $selection) {
                 ForEach(streams) { stream in
                     HStack {
@@ -51,9 +40,24 @@ struct ContentView: View {
                     StreamsRepository.shared.deleteStream(at: first)
                     reloadStreams()
                 }
+                .onMove(perform: move)
             }
+            .toolbar {
+                HStack {
+                    Button("Add", action: onAddButtonPressed)
+                    Spacer()
+                    EditButton()
+                }
+            }
+            .sheet(isPresented: $sheetIsPresented,
+                   onDismiss: {
+                reloadStreams()
+            }){
+                AddNewStreamForm()
+            }
+            
             if let selection = selection, streamPlayerEngine.state != .stopped {
-
+                
                 Text("now playing: \(selection.name)")
                 Button(state == .playing ? "Pause" : "Resume") {
                     streamPlayerEngine.playPauseToggle()
@@ -66,16 +70,29 @@ struct ContentView: View {
             reloadStreams()
         })
     }
+}
 
+private extension ContentView {
 
-     private func reloadStreams() {
+    func reloadStreams() {
 
          streams = StreamsRepository.shared.streams
     }
 
-    private func onStreamSelected(stream: Stream) {
+    func onStreamSelected(stream: Stream) {
 
         streamPlayerEngine.play(stream: stream)
+    }
+    
+    func move(from source: IndexSet, to destination: Int) {
+        
+        StreamsRepository.shared.move(from: source, to: destination)
+        reloadStreams()
+    }
+    
+    
+    func onAddButtonPressed() {
+        sheetIsPresented = true
     }
 }
 
