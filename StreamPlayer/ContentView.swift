@@ -58,10 +58,11 @@ struct ContentView: View {
             
             if let selection = selection, streamPlayerEngine.state != .stopped {
                 
-                Text("now playing: \(selection.name)")
+                Text("now playing: \(selection.name)").padding([.top], 10)
                 Button(state == .playing ? "Pause" : "Resume") {
                     streamPlayerEngine.playPauseToggle()
                 }
+                .frame(minHeight: 44).padding([.bottom], 20)
             }
         }.onAppear(perform: {
             streamPlayerEngine.onPlayStateUpdate = {
