@@ -14,10 +14,13 @@ struct ContentView: View {
     
     @State private var streams: [Stream] = []
     private var streamPlayerEngine = StreamPlayerEngine()
-    @State private var sheetIsPresented = false
+    @State private var alertIsBeingPresented = false
     @State private var selection: Stream?
     @State private var audioInitialised = false
     @State private var state: StreamPlayerEngine.PlayState = .stopped
+    @State private var newStreamName: String = ""
+    @State private var newStreamURL: String = ""
+    @State private var addStreamOKButtonEnabled = false
     
     var body: some View {
         NavigationStack {
@@ -44,17 +47,33 @@ struct ContentView: View {
             }
             .toolbar {
                 HStack {
-                    Button("Add", action: onAddButtonPressed)
+                    Button("Add", action: {
+                        if let clipboardString = UIPasteboard.general.string,
+                           let clipboardURL = URL(string: clipboardString),
+                           ["http", "https"].contains(clipboardURL.scheme) &&
+                           clipboardURL.host?.isEmpty == false {
+                            
+                            newStreamURL = clipboardString
+                        }
+                        alertIsBeingPresented = true
+                    })
+                        .alert("New Stream", isPresented: $alertIsBeingPresented) {
+                            TextField("Name", text: $newStreamName).onChange(of: newStreamName, perform: validateNewStreamInput)
+                            TextField("URL", text: $newStreamURL).onChange(of: newStreamURL, perform: validateNewStreamInput)
+                            Button (action: {
+                                addNewStream()
+                            }, label: {
+                                Text("Add")
+                            })
+                            Button(action : {}, 
+                                   label: {
+                                Text("Cancel")
+                            })
+                        }
+                }
                     Spacer()
                     EditButton()
                 }
-            }
-            .sheet(isPresented: $sheetIsPresented,
-                   onDismiss: {
-                reloadStreams()
-            }){
-                AddNewStreamForm()
-            }
             
             if let selection = selection, streamPlayerEngine.state != .stopped {
                 
@@ -75,6 +94,38 @@ struct ContentView: View {
 
 private extension ContentView {
 
+    func alertOKAction() {
+        addNewStream()
+        newStreamName = ""
+        newStreamURL = ""
+    }
+    
+    
+    func validateNewStreamInput(_ value: String) {
+     
+        let urlValid: Bool
+        if let url = URLComponents(string: newStreamURL),
+           ["http", "https"].contains(url.scheme),
+           url.host?.isEmpty == false {
+            urlValid = true
+        }
+        else {
+            urlValid = false
+        }
+        addStreamOKButtonEnabled = !newStreamName.isEmpty && urlValid
+    }
+    
+    func addNewStream() {
+        
+        if let url = URL(string: newStreamURL), !newStreamName.isEmpty {
+            
+            StreamsRepository.shared.appendStream(Stream(url: url, name: newStreamName))
+            reloadStreams()
+            newStreamURL = ""
+            newStreamName = ""
+        }
+    }
+    
     func reloadStreams() {
 
          streams = StreamsRepository.shared.streams
@@ -89,11 +140,6 @@ private extension ContentView {
         
         StreamsRepository.shared.move(from: source, to: destination)
         reloadStreams()
-    }
-    
-    
-    func onAddButtonPressed() {
-        sheetIsPresented = true
     }
 }
 
