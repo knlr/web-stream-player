@@ -32,6 +32,15 @@ internal class StreamsRepository {
         saveStreams(streams)
     }
     
+    
+    internal func updateStream(at index: Int, stream: Stream) {
+        
+        var streams = self.streams
+        guard index < streams.count else { return }
+        streams[index] = stream
+        saveStreams(streams)
+    }
+    
     internal func move(from: IndexSet, to: Int) {
         
         var streams = self.streams

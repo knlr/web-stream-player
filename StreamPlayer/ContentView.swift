@@ -12,15 +12,17 @@ import MediaPlayer
 
 struct ContentView: View {
     
+    @State var editMode: EditMode = .inactive
     @State private var streams: [Stream] = []
     private var streamPlayerEngine = StreamPlayerEngine()
-    @State private var alertIsBeingPresented = false
+    @State private var newStreamAlertIsBeingPresented = false
+    @State private var streamEditAlertIsBeingPresented = false
     @State private var selection: Stream?
+    @State private var editingStreamIndex: Int? = nil
     @State private var audioInitialised = false
     @State private var state: StreamPlayerEngine.PlayState = .stopped
-    @State private var newStreamName: String = ""
-    @State private var newStreamURL: String = ""
     @State private var addStreamOKButtonEnabled = false
+    @State var name: String = ""
     
     var body: some View {
         NavigationStack {
@@ -34,8 +36,34 @@ struct ContentView: View {
                     }
                     .contentShape(Rectangle())
                     .onTapGesture {
-                        selection = stream
-                        onStreamSelected(stream: stream)
+                        
+                        if editMode.isEditing == true {
+                            editingStreamIndex = streams.firstIndex(where: { $0 == stream })
+                            streamEditAlertIsBeingPresented = true
+                        }
+                        else {
+                            selection = stream
+                            onStreamSelected(stream: stream)
+                        }
+                    }
+                    .alert("Edit Stream", isPresented: $streamEditAlertIsBeingPresented) {
+                                  
+                        if streamEditAlertIsBeingPresented,
+                           let editingStreamIndex = editingStreamIndex,
+                           editingStreamIndex < streams.count {
+                            
+                            StreamEditView(okAction: { updatedStream in
+                                
+                                StreamsRepository.shared.updateStream(at: editingStreamIndex, stream: updatedStream)
+                                self.editingStreamIndex = nil
+                                reloadStreams()
+                            },
+        
+                                           name: streams[editingStreamIndex].name,
+                                           url: streams[editingStreamIndex].url.absoluteString,
+                                           actionLabel: "Save"
+                            )
+                        }
                     }
                 }
                 .onDelete { index in
@@ -44,36 +72,31 @@ struct ContentView: View {
                     reloadStreams()
                 }
                 .onMove(perform: move)
+                
             }
             .toolbar {
                 HStack {
                     Button("Add", action: {
-                        if let clipboardString = UIPasteboard.general.string,
-                           let clipboardURL = URL(string: clipboardString),
-                           ["http", "https"].contains(clipboardURL.scheme) &&
-                           clipboardURL.host?.isEmpty == false {
-                            
-                            newStreamURL = clipboardString
-                        }
-                        alertIsBeingPresented = true
+                        newStreamAlertIsBeingPresented = true
                     })
-                        .alert("New Stream", isPresented: $alertIsBeingPresented) {
-                            TextField("Name", text: $newStreamName).onChange(of: newStreamName, perform: validateNewStreamInput)
-                            TextField("URL", text: $newStreamURL).onChange(of: newStreamURL, perform: validateNewStreamInput)
-                            Button (action: {
-                                addNewStream()
-                            }, label: {
-                                Text("Add")
-                            })
-                            Button(action : {}, 
-                                   label: {
-                                Text("Cancel")
-                            })
+                        .alert("New Stream", isPresented: $newStreamAlertIsBeingPresented) {
+                                      
+                            if newStreamAlertIsBeingPresented {
+                                StreamEditView(okAction: { stream in
+                                    StreamsRepository.shared.appendStream(stream)
+                                    reloadStreams()
+                                },
+                                       name: "",
+                                       url: getURLFromClipboard(),
+                                               actionLabel: "Add"
+                                )
+                            }
                         }
                 }
                     Spacer()
-                    EditButton()
-                }
+                EditButton()
+            }
+            .environment(\.editMode, $editMode)
             
             if let selection = selection, streamPlayerEngine.state != .stopped {
                 
@@ -94,37 +117,18 @@ struct ContentView: View {
 
 private extension ContentView {
 
-    func alertOKAction() {
-        addNewStream()
-        newStreamName = ""
-        newStreamURL = ""
-    }
-    
-    
-    func validateNewStreamInput(_ value: String) {
-     
-        let urlValid: Bool
-        if let url = URLComponents(string: newStreamURL),
-           ["http", "https"].contains(url.scheme),
-           url.host?.isEmpty == false {
-            urlValid = true
+    func getURLFromClipboard() -> String {
+        
+        if let clipboardString = UIPasteboard.general.string,
+           clipboardString.isValidWebURL {
+            
+            return clipboardString
         }
         else {
-            urlValid = false
-        }
-        addStreamOKButtonEnabled = !newStreamName.isEmpty && urlValid
-    }
-    
-    func addNewStream() {
-        
-        if let url = URL(string: newStreamURL), !newStreamName.isEmpty {
-            
-            StreamsRepository.shared.appendStream(Stream(url: url, name: newStreamName))
-            reloadStreams()
-            newStreamURL = ""
-            newStreamName = ""
+            return ""
         }
     }
+
     
     func reloadStreams() {
 
@@ -143,20 +147,43 @@ private extension ContentView {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-
-    init() {
-        let streamsArray: [Stream] = []
-        UserDefaults.standard.setValue(try! PropertyListEncoder().encode(streamsArray), forKey: "streams")
+struct StreamEditView : View {
+    
+    internal var okAction: (Stream) -> Void = { _ in }
+    @State internal var name: String = ""
+    @State internal var url: String = ""
+    @State internal var actionLabel: String = ""
+    
+    var body : some View {
+        
+        TextField("Name", text: $name)
+        TextField("URL", text: $url)
+        
+        Button (action: {
+            if let url = URL(string: url), !name.isEmpty {
+                okAction(Stream(url: url, name: name))
+            }
+        }, label: {
+            Text(actionLabel)
+        })
+        Button(action : {},
+               label: {
+            Text("Cancel")
+        })
     }
+}
 
-    static var previews: some View {
-        Group {
 
-            ContentView()
-//            ContentView(streams: [
-//                ]
-//            )
+
+extension String {
+    
+    var isValidWebURL: Bool {
+        
+        guard let asURL = URL(string: self),
+              ["http", "https"].contains(asURL.scheme) &&
+                asURL.host?.isEmpty == false else { 
+            return false
         }
+        return true
     }
 }
