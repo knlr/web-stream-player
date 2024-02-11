@@ -76,9 +76,12 @@ struct ContentView: View {
             }
             .toolbar {
                 ToolbarItemGroup(placement: .topBarLeading) {
-                    Button("Add", action: {
+                    Button(action: {
                         newStreamAlertIsBeingPresented = true
+                    }, label: {
+                        Image(systemName: "plus")
                     })
+                    
                     .alert("New Stream", isPresented: $newStreamAlertIsBeingPresented) {
                         if newStreamAlertIsBeingPresented {
                             StreamEditView(okAction: { stream in
