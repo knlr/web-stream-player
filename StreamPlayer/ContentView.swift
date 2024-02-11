@@ -122,7 +122,8 @@ private extension ContentView {
 
     func getURLFromClipboard() -> String {
         
-        if let clipboardString = UIPasteboard.general.string,
+        if UIPasteboard.general.hasStrings, 
+            let clipboardString = UIPasteboard.general.string,
            clipboardString.isValidWebURL {
             
             return clipboardString
