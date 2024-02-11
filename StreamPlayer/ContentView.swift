@@ -75,26 +75,26 @@ struct ContentView: View {
                 
             }
             .toolbar {
-                HStack {
+                ToolbarItemGroup(placement: .topBarLeading) {
                     Button("Add", action: {
                         newStreamAlertIsBeingPresented = true
                     })
-                        .alert("New Stream", isPresented: $newStreamAlertIsBeingPresented) {
-                                      
-                            if newStreamAlertIsBeingPresented {
-                                StreamEditView(okAction: { stream in
-                                    StreamsRepository.shared.appendStream(stream)
-                                    reloadStreams()
-                                },
-                                       name: "",
-                                       url: getURLFromClipboard(),
-                                               actionLabel: "Add"
-                                )
-                            }
+                    .alert("New Stream", isPresented: $newStreamAlertIsBeingPresented) {
+                        if newStreamAlertIsBeingPresented {
+                            StreamEditView(okAction: { stream in
+                                StreamsRepository.shared.appendStream(stream)
+                                reloadStreams()
+                            },
+                                           name: "",
+                                           url: getURLFromClipboard(),
+                                           actionLabel: "Add"
+                            )
                         }
+                    }
                 }
-                    Spacer()
-                EditButton()
+                ToolbarItemGroup(placement: .topBarTrailing) {
+                    EditButton()
+                }
             }
             .environment(\.editMode, $editMode)
             
