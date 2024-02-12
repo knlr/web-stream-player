@@ -16,8 +16,8 @@ internal class StreamPlayerEngine {
     }
     private var player = AVPlayer()
     private var audioInitialised = false
-    private var currentStream: Stream?
-    internal private (set) var state: PlayState = .stopped 
+    internal private (set) var currentStream: Stream?
+    internal private (set) var state: PlayState = .stopped
     {
         didSet {
             onPlayStateUpdate()
@@ -62,21 +62,44 @@ internal class StreamPlayerEngine {
         }
     }
         
+    
+    internal func skipForward() {
+        
+        let streams = StreamsRepository.shared.streams
+        guard let currentStream = currentStream, streams.count > 1,
+        let index = streams.firstIndex(of: currentStream) else {
+            return
+        }
+        play(stream: streams[(index + 1) % streams.count])
+    }
+    
+    
+    internal func skipBackward() {
+        
+        let streams = StreamsRepository.shared.streams
+        guard let currentStream = currentStream, streams.count > 1,
+        let index = streams.firstIndex(of: currentStream) else {
+            return
+        }
+        play(stream: streams[index == 0 ? streams.count - 1 : index - 1])
+    }
+    
     internal var onPlayStateUpdate: (() -> Void) = {  }
 }
 
 private extension StreamPlayerEngine {
+    
     
     func onNextTrackCommand(event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
      
         guard let currentStream = currentStream else {
             return .noActionableNowPlayingItem
         }
-        guard let index = StreamsRepository.shared.streams.firstIndex(of: currentStream) else {
+        let streams = StreamsRepository.shared.streams
+        guard let index = streams.firstIndex(of: currentStream) else {
          
             return .noSuchContent
         }
-        let streams = StreamsRepository.shared.streams
         play(stream: streams[(index + 1) % streams.count])
         return .success
     }

@@ -104,11 +104,31 @@ struct ContentView: View {
             if let selection = selection, streamPlayerEngine.state != .stopped {
                 
                 Text("now playing: \(selection.name)").padding([.top], 10)
-                Button(action:
-                        {
-                       streamPlayerEngine.playPauseToggle()
-                   }, label: { Image(systemName:  state == .playing ? "pause" : "play") })
-                .frame(minHeight: 44).padding([.bottom], 20)
+                HStack {
+                    if streams.count > 1 {
+                        Button(action: {
+                            streamPlayerEngine.skipBackward()
+                        }, label: {
+                            Image(systemName: "backward")
+                        })
+                        .frame(minHeight: 44)
+                    }
+                    
+                    Button(action:  {
+                        streamPlayerEngine.playPauseToggle()
+                    }, label: {
+                        Image(systemName: state == .playing ? "pause" : "play")
+                    })
+                    .frame(minHeight: 44)
+                    if streams.count > 1 {
+                        Button(action: {
+                            streamPlayerEngine.skipForward()
+                        }, label: {
+                            Image(systemName: "forward")
+                        })
+                        .frame(minHeight: 44)
+                    }
+                }.padding([.bottom], 20)
             }
         }.onAppear(perform: {
             streamPlayerEngine.onPlayStateUpdate = {
