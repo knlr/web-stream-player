@@ -14,13 +14,11 @@ struct ContentView: View {
     
     @State var editMode: EditMode = .inactive
     @State private var streams: [Stream] = []
-    private var streamPlayerEngine = StreamPlayerEngine()
+    @StateObject  private var streamPlayerEngine = StreamPlayerEngine()
     @State private var newStreamAlertIsBeingPresented = false
     @State private var streamEditAlertIsBeingPresented = false
     @State private var selection: Stream?
     @State private var editingStreamIndex: Int? = nil
-    @State private var audioInitialised = false
-    @State private var state: StreamPlayerEngine.PlayState = .stopped
     @State private var addStreamOKButtonEnabled = false
     @State var name: String = ""
     
@@ -101,9 +99,9 @@ struct ContentView: View {
             }
             .environment(\.editMode, $editMode)
             
-            if let selection = selection, streamPlayerEngine.state != .stopped {
+            if let currentlyPlaying = streamPlayerEngine.currentStream, streamPlayerEngine.state != .stopped {
                 
-                Text("now playing: \(selection.name)").padding([.top], 10)
+                Text("now playing: \(currentlyPlaying.name)").padding([.top], 10)
                 HStack {
                     if streams.count > 1 {
                         Button(action: {
@@ -117,7 +115,7 @@ struct ContentView: View {
                     Button(action:  {
                         streamPlayerEngine.playPauseToggle()
                     }, label: {
-                        Image(systemName: state == .playing ? "pause" : "play")
+                        Image(systemName: streamPlayerEngine.state == .playing ? "pause" : "play")
                     })
                     .frame(minHeight: 44)
                     if streams.count > 1 {
@@ -131,9 +129,7 @@ struct ContentView: View {
                 }.padding([.bottom], 20)
             }
         }.onAppear(perform: {
-            streamPlayerEngine.onPlayStateUpdate = {
-                state = streamPlayerEngine.state
-            }
+
             reloadStreams()
         })
     }

@@ -9,20 +9,15 @@ import Foundation
 import AVFoundation
 import MediaPlayer
 
-internal class StreamPlayerEngine {
+internal class StreamPlayerEngine : ObservableObject {
     
     internal enum PlayState {
         case stopped, paused, playing
     }
     private var player = AVPlayer()
     private var audioInitialised = false
-    internal private (set) var currentStream: Stream?
-    internal private (set) var state: PlayState = .stopped
-    {
-        didSet {
-            onPlayStateUpdate()
-        }
-    }
+    @Published internal private (set) var currentStream: Stream?
+    @Published internal private (set) var state: PlayState = .stopped
 
     
     internal func play(stream: Stream) {
