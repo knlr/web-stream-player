@@ -3,37 +3,33 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		726EE87B290534A00020C313 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726EE87A290534A00020C313 /* AppDelegate.swift */; };
-		726EE87D290534A00020C313 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726EE87C290534A00020C313 /* SceneDelegate.swift */; };
-		726EE87F290534A00020C313 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726EE87E290534A00020C313 /* ContentView.swift */; };
-		726EE881290534A30020C313 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 726EE880290534A30020C313 /* Assets.xcassets */; };
-		726EE884290534A30020C313 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 726EE883290534A30020C313 /* Preview Assets.xcassets */; };
-		726EE887290534A30020C313 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 726EE885290534A30020C313 /* LaunchScreen.storyboard */; };
-		72B9579D2B3C882300C5139A /* Stream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B9579C2B3C882300C5139A /* Stream.swift */; };
-		72B9579F2B3C891F00C5139A /* StreamsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B9579E2B3C891F00C5139A /* StreamsRepository.swift */; };
-		72B957A12B3C912C00C5139A /* StreamPlayerEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B957A02B3C912C00C5139A /* StreamPlayerEngine.swift */; };
+		72F6CFED2BC4584D00D2FA69 /* StreamPlayerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6CFEC2BC4584D00D2FA69 /* StreamPlayerApp.swift */; };
+		72F6CFEF2BC4584D00D2FA69 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6CFEE2BC4584D00D2FA69 /* ContentView.swift */; };
+		72F6CFF12BC4584D00D2FA69 /* Stream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6CFF02BC4584D00D2FA69 /* Stream.swift */; };
+		72F6CFF32BC4585000D2FA69 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72F6CFF22BC4585000D2FA69 /* Assets.xcassets */; };
+		72F6CFF72BC4585000D2FA69 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72F6CFF62BC4585000D2FA69 /* Preview Assets.xcassets */; };
+		72F6CFFE2BC5546F00D2FA69 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6CFFD2BC5546E00D2FA69 /* String+Extensions.swift */; };
+		72F6D00A2BC579A000D2FA69 /* StreamEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6D0092BC579A000D2FA69 /* StreamEditView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		726EE877290534A00020C313 /* StreamPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StreamPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		726EE87A290534A00020C313 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		726EE87C290534A00020C313 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		726EE87E290534A00020C313 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		726EE880290534A30020C313 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		726EE883290534A30020C313 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		726EE886290534A30020C313 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		726EE888290534A30020C313 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		72B9579C2B3C882300C5139A /* Stream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stream.swift; sourceTree = "<group>"; };
-		72B9579E2B3C891F00C5139A /* StreamsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamsRepository.swift; sourceTree = "<group>"; };
-		72B957A02B3C912C00C5139A /* StreamPlayerEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamPlayerEngine.swift; sourceTree = "<group>"; };
+		72F6CFE92BC4584D00D2FA69 /* StreamPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StreamPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		72F6CFEC2BC4584D00D2FA69 /* StreamPlayerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamPlayerApp.swift; sourceTree = "<group>"; };
+		72F6CFEE2BC4584D00D2FA69 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		72F6CFF02BC4584D00D2FA69 /* Stream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stream.swift; sourceTree = "<group>"; };
+		72F6CFF22BC4585000D2FA69 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		72F6CFF42BC4585000D2FA69 /* StreamPlayer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StreamPlayer.entitlements; sourceTree = "<group>"; };
+		72F6CFF62BC4585000D2FA69 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		72F6CFFD2BC5546E00D2FA69 /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		72F6D0092BC579A000D2FA69 /* StreamEditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamEditView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		726EE874290534A00020C313 /* Frameworks */ = {
+		72F6CFE62BC4584D00D2FA69 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -43,43 +39,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		726EE86E290534A00020C313 = {
+		72F6CFE02BC4584D00D2FA69 = {
 			isa = PBXGroup;
 			children = (
-				726EE879290534A00020C313 /* StreamPlayer */,
-				726EE878290534A00020C313 /* Products */,
+				72F6CFEB2BC4584D00D2FA69 /* StreamPlayer */,
+				72F6CFEA2BC4584D00D2FA69 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		726EE878290534A00020C313 /* Products */ = {
+		72F6CFEA2BC4584D00D2FA69 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				726EE877290534A00020C313 /* StreamPlayer.app */,
+				72F6CFE92BC4584D00D2FA69 /* StreamPlayer.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		726EE879290534A00020C313 /* StreamPlayer */ = {
+		72F6CFEB2BC4584D00D2FA69 /* StreamPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				726EE87A290534A00020C313 /* AppDelegate.swift */,
-				726EE87C290534A00020C313 /* SceneDelegate.swift */,
-				726EE87E290534A00020C313 /* ContentView.swift */,
-				72B9579C2B3C882300C5139A /* Stream.swift */,
-				72B9579E2B3C891F00C5139A /* StreamsRepository.swift */,
-				72B957A02B3C912C00C5139A /* StreamPlayerEngine.swift */,
-				726EE880290534A30020C313 /* Assets.xcassets */,
-				726EE885290534A30020C313 /* LaunchScreen.storyboard */,
-				726EE888290534A30020C313 /* Info.plist */,
-				726EE882290534A30020C313 /* Preview Content */,
+				72F6CFEC2BC4584D00D2FA69 /* StreamPlayerApp.swift */,
+				72F6CFEE2BC4584D00D2FA69 /* ContentView.swift */,
+				72F6D0092BC579A000D2FA69 /* StreamEditView.swift */,
+				72F6CFFD2BC5546E00D2FA69 /* String+Extensions.swift */,
+				72F6CFF02BC4584D00D2FA69 /* Stream.swift */,
+				72F6CFF22BC4585000D2FA69 /* Assets.xcassets */,
+				72F6CFF42BC4585000D2FA69 /* StreamPlayer.entitlements */,
+				72F6CFF52BC4585000D2FA69 /* Preview Content */,
 			);
 			path = StreamPlayer;
 			sourceTree = "<group>";
 		};
-		726EE882290534A30020C313 /* Preview Content */ = {
+		72F6CFF52BC4585000D2FA69 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				726EE883290534A30020C313 /* Preview Assets.xcassets */,
+				72F6CFF62BC4585000D2FA69 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -87,13 +81,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		726EE876290534A00020C313 /* StreamPlayer */ = {
+		72F6CFE82BC4584D00D2FA69 /* StreamPlayer */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 726EE88B290534A30020C313 /* Build configuration list for PBXNativeTarget "StreamPlayer" */;
+			buildConfigurationList = 72F6CFFA2BC4585000D2FA69 /* Build configuration list for PBXNativeTarget "StreamPlayer" */;
 			buildPhases = (
-				726EE873290534A00020C313 /* Sources */,
-				726EE874290534A00020C313 /* Frameworks */,
-				726EE875290534A00020C313 /* Resources */,
+				72F6CFE52BC4584D00D2FA69 /* Sources */,
+				72F6CFE62BC4584D00D2FA69 /* Frameworks */,
+				72F6CFE72BC4584D00D2FA69 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -101,90 +95,78 @@
 			);
 			name = StreamPlayer;
 			productName = StreamPlayer;
-			productReference = 726EE877290534A00020C313 /* StreamPlayer.app */;
+			productReference = 72F6CFE92BC4584D00D2FA69 /* StreamPlayer.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		726EE86F290534A00020C313 /* Project object */ = {
+		72F6CFE12BC4584D00D2FA69 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1240;
-				LastUpgradeCheck = 1240;
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1530;
+				LastUpgradeCheck = 1530;
 				TargetAttributes = {
-					726EE876290534A00020C313 = {
-						CreatedOnToolsVersion = 12.4;
+					72F6CFE82BC4584D00D2FA69 = {
+						CreatedOnToolsVersion = 15.3;
 					};
 				};
 			};
-			buildConfigurationList = 726EE872290534A00020C313 /* Build configuration list for PBXProject "StreamPlayer" */;
-			compatibilityVersion = "Xcode 9.3";
+			buildConfigurationList = 72F6CFE42BC4584D00D2FA69 /* Build configuration list for PBXProject "StreamPlayer" */;
+			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = 726EE86E290534A00020C313;
-			productRefGroup = 726EE878290534A00020C313 /* Products */;
+			mainGroup = 72F6CFE02BC4584D00D2FA69;
+			productRefGroup = 72F6CFEA2BC4584D00D2FA69 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				726EE876290534A00020C313 /* StreamPlayer */,
+				72F6CFE82BC4584D00D2FA69 /* StreamPlayer */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		726EE875290534A00020C313 /* Resources */ = {
+		72F6CFE72BC4584D00D2FA69 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				726EE887290534A30020C313 /* LaunchScreen.storyboard in Resources */,
-				726EE884290534A30020C313 /* Preview Assets.xcassets in Resources */,
-				726EE881290534A30020C313 /* Assets.xcassets in Resources */,
+				72F6CFF72BC4585000D2FA69 /* Preview Assets.xcassets in Resources */,
+				72F6CFF32BC4585000D2FA69 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		726EE873290534A00020C313 /* Sources */ = {
+		72F6CFE52BC4584D00D2FA69 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				72B957A12B3C912C00C5139A /* StreamPlayerEngine.swift in Sources */,
-				726EE87B290534A00020C313 /* AppDelegate.swift in Sources */,
-				726EE87D290534A00020C313 /* SceneDelegate.swift in Sources */,
-				72B9579F2B3C891F00C5139A /* StreamsRepository.swift in Sources */,
-				726EE87F290534A00020C313 /* ContentView.swift in Sources */,
-				72B9579D2B3C882300C5139A /* Stream.swift in Sources */,
+				72F6CFFE2BC5546F00D2FA69 /* String+Extensions.swift in Sources */,
+				72F6D00A2BC579A000D2FA69 /* StreamEditView.swift in Sources */,
+				72F6CFEF2BC4584D00D2FA69 /* ContentView.swift in Sources */,
+				72F6CFF12BC4584D00D2FA69 /* Stream.swift in Sources */,
+				72F6CFED2BC4584D00D2FA69 /* StreamPlayerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXVariantGroup section */
-		726EE885290534A30020C313 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				726EE886290534A30020C313 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
-		726EE889290534A30020C313 /* Debug */ = {
+		72F6CFF82BC4585000D2FA69 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -214,7 +196,8 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -228,24 +211,23 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
-		726EE88A290534A30020C313 /* Release */ = {
+		72F6CFF92BC4585000D2FA69 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -275,7 +257,8 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -283,55 +266,84 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		726EE88C290534A30020C313 /* Debug */ = {
+		72F6CFFB2BC4585000D2FA69 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = StreamPlayer/StreamPlayer.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"StreamPlayer/Preview Content\"";
 				DEVELOPMENT_TEAM = GDYH754BNE;
+				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = StreamPlayer/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = knutlorenzen.app.streamplayer;
+				GENERATE_INFOPLIST_FILE = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = knutlorenzen.app.streamplayer.StreamPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		726EE88D290534A30020C313 /* Release */ = {
+		72F6CFFC2BC4585000D2FA69 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = StreamPlayer/StreamPlayer.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"StreamPlayer/Preview Content\"";
 				DEVELOPMENT_TEAM = GDYH754BNE;
+				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = StreamPlayer/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = knutlorenzen.app.streamplayer;
+				GENERATE_INFOPLIST_FILE = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = knutlorenzen.app.streamplayer.StreamPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -340,25 +352,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		726EE872290534A00020C313 /* Build configuration list for PBXProject "StreamPlayer" */ = {
+		72F6CFE42BC4584D00D2FA69 /* Build configuration list for PBXProject "StreamPlayer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				726EE889290534A30020C313 /* Debug */,
-				726EE88A290534A30020C313 /* Release */,
+				72F6CFF82BC4585000D2FA69 /* Debug */,
+				72F6CFF92BC4585000D2FA69 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		726EE88B290534A30020C313 /* Build configuration list for PBXNativeTarget "StreamPlayer" */ = {
+		72F6CFFA2BC4585000D2FA69 /* Build configuration list for PBXNativeTarget "StreamPlayer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				726EE88C290534A30020C313 /* Debug */,
-				726EE88D290534A30020C313 /* Release */,
+				72F6CFFB2BC4585000D2FA69 /* Debug */,
+				72F6CFFC2BC4585000D2FA69 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 726EE86F290534A00020C313 /* Project object */;
+	rootObject = 72F6CFE12BC4584D00D2FA69 /* Project object */;
 }

@@ -1,16 +1,21 @@
 //
-//  Stream.swift
+//  Item.swift
 //  StreamPlayer
 //
-//  Created by Knut on 27/12/2023.
+//  Created by Knut on 08/04/2024.
 //
 
 import Foundation
+import SwiftData
 
-
-struct Stream : Hashable, Codable {
-    let url: URL
-    let name: String
+@Model
+final class Stream {
+    init(url: URL, name: String) {
+        self.url = url
+        self.name = name
+    }
+    var url: URL
+    var name: String
 }
 
 extension Stream : Identifiable {
