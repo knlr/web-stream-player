@@ -11,14 +11,19 @@ import SwiftData
 struct ContentView: View {
     
     @Environment(\.modelContext) private var modelContext
+    @State var editMode: EditMode = .inactive
     @State private var newStreamAlertIsBeingPresented = false
-    @Query private var streams: [Stream]
+    @State private var streamEditAlertIsBeingPresented = false
+    @Query private var streamList: [StreamList]
+    @State private var editingStreamIndex: Int? = nil
+
+
     @StateObject private var streamPlayerEngine = StreamPlayerEngine()
     
     var body: some View {
         NavigationStack {
             List {
-                ForEach(streams) { stream in
+                ForEach(streamList[0].streams) { stream in
                     HStack {
                         let margin: CGFloat = 15
                         Spacer().frame(minWidth: margin, maxWidth: margin)
@@ -28,42 +33,52 @@ struct ContentView: View {
                     .contentShape(Rectangle())
                     .onTapGesture {
                         
-                        streamPlayerEngine.play(stream: stream)
-//                        if editMode.isEditing == true {
-//                            editingStreamIndex = streams.firstIndex(where: { $0 == stream })
-//                            streamEditAlertIsBeingPresented = true
-//                        }
-//                        else {
-//                            selection = stream
-//                            onStreamSelected(stream: stream)
-//                        }
+                        if editMode.isEditing == true {
+                            editingStreamIndex = streamList[0].streams.firstIndex(where: { $0 == stream })
+                            streamEditAlertIsBeingPresented = true
+                        }
+                        else {
+                            streamPlayerEngine.play(stream: stream)
+                        }
+                    }
+                    .alert("Edit Stream", isPresented: $streamEditAlertIsBeingPresented) {
+                        
+                        if streamEditAlertIsBeingPresented,
+                           let editingStreamIndex = editingStreamIndex,
+                           editingStreamIndex < streamList[0].streams.count {
+                            
+                            StreamEditView(okAction: { updatedStream in
+                                
+                                streamList[0].streams[editingStreamIndex] = updatedStream
+                                self.editingStreamIndex = nil
+                            },
+                                           
+                                           name: streamList[0].streams[editingStreamIndex].name,
+                                           url: streamList[0].streams[editingStreamIndex].url.absoluteString,
+                                           actionLabel: "Save"
+                            )
+                        }
                     }
                 }
-                .onDelete { indexSet in
-                    for index in indexSet {
-                        modelContext.delete(streams[index])
-                    }
-                }
-                .onMove { indexSet, index in
-                    
-                }
+                .onDelete(perform: deleteItems(offsets:))
+                .onMove(perform: rearrangeStream(indexSet:index:))
             }
             .toolbar {
 #if os(macOS)
-            GroupBox() {
-                HStack {
-                    Button(action: {
-                        // newStreamAlertIsBeingPresented = true
-                    }, label: {
-                        Image(systemName: "plus")
-                    })
-                    Button(action: {
-                        // newStreamAlertIsBeingPresented = true
-                    }, label: {
-                        Image(systemName: "pencil")
-                    })
+                GroupBox() {
+                    HStack {
+                        Button(action: {
+                            // newStreamAlertIsBeingPresented = true
+                        }, label: {
+                            Image(systemName: "plus")
+                        })
+                        Button(action: {
+                            // newStreamAlertIsBeingPresented = true
+                        }, label: {
+                            Image(systemName: "pencil")
+                        })
+                    }
                 }
-            }
 #elseif os(iOS)
                 ToolbarItemGroup(placement: .topBarLeading) {
                     Button(action: {
@@ -86,12 +101,13 @@ struct ContentView: View {
                 }
 #endif
             }
-            
+            .environment(\.editMode, $editMode)
+
             if let currentlyPlaying = streamPlayerEngine.currentStream, streamPlayerEngine.state != .stopped {
                 
                 Text("now playing: \(currentlyPlaying.name)").padding([.top], 10)
                 HStack {
-                    if streams.count > 1 {
+                    if streamList[0].streams.count > 1 {
                         Button(action: {
                             streamPlayerEngine.skipBackward()
                         }, label: {
@@ -106,7 +122,7 @@ struct ContentView: View {
                         Image(systemName: streamPlayerEngine.state == .playing ? "pause" : "play")
                     })
                     .frame(minHeight: 44)
-                    if streams.count > 1 {
+                    if streamList[0].streams.count > 1 {
                         Button(action: {
                             streamPlayerEngine.skipForward()
                         }, label: {
@@ -120,50 +136,23 @@ struct ContentView: View {
         .onAppear() {
             streamPlayerEngine.modelContext = modelContext
         }
-//        NavigationSplitView {
-//            List {
-//                ForEach(streams) { stream in
-//                    NavigationLink {
-//                        Text("stream at ")
-//                    } label: {
-//                        Text("nil")
-//                    }
-//                }
-//                .onDelete(perform: deleteItems)
-//            }
-//#if os(macOS)
-//            .navigationSplitViewColumnWidth(min: 180, ideal: 200)
-//#endif
-//            .toolbar {
-//#if os(iOS)
-//                ToolbarItem(placement: .navigationBarTrailing) {
-//                    EditButton()
-//                }
-//#endif
-//                ToolbarItem {
-//                    Button(action: addItem) {
-//                        Label("Add Item", systemImage: "plus")
-//                    }
-//                }
-//            }
-//        } detail: {
-//            Text("Select an item")
-//        }
     }
 
     private func addStream(_ stream: Stream) {
         
         withAnimation {
-            modelContext.insert(stream)
+            streamList[0].streams.append(stream)
         }
     }
     
+    private func rearrangeStream(indexSet: IndexSet, index: Int) {
+        
+        streamList[0].streams.move(fromOffsets: indexSet, toOffset: index)
+    }
     
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
-            for index in offsets {
-                modelContext.delete(streams[index])
-            }
+            streamList[0].streams.remove(atOffsets: offsets)
         }
     }
 }

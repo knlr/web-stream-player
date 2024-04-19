@@ -23,3 +23,11 @@ extension Stream : Identifiable {
         return url.absoluteString
     }
 }
+
+@Model
+final class StreamList {
+    init(streams: [Stream]) {
+        self.streams = streams
+    }
+    var streams: [Stream]
+}

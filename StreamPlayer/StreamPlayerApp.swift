@@ -10,14 +10,21 @@ import SwiftData
 
 @main
 struct StreamPlayerApp: App {
+    @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
     @State var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Stream.self
+            StreamList.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
         do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
+            let mc = try ModelContainer(for: schema, configurations: [modelConfiguration])
+            let streamList = try mc.mainContext.fetch(FetchDescriptor<StreamList>())
+            if streamList.isEmpty {
+                mc.mainContext.insert(StreamList(streams: []))
+                try mc.mainContext.save()
+            }
+            return mc
         } catch {
             fatalError("Could not create ModelContainer: \(error)")
         }
@@ -28,5 +35,33 @@ struct StreamPlayerApp: App {
             ContentView()
         }
         .modelContainer(sharedModelContainer)
+    }
+}
+
+@MainActor
+class SceneDelegate: NSObject, UIWindowSceneDelegate, ObservableObject {
+    
+    
+    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        print(#function)
+        
+    }
+}
+
+class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject {
+
+    func application(
+        _ application: UIApplication,
+        configurationForConnecting connectingSceneSession: UISceneSession,
+        options: UIScene.ConnectionOptions
+    ) -> UISceneConfiguration {
+
+        let configuration = UISceneConfiguration(
+                                name: nil,
+                                sessionRole: connectingSceneSession.role)
+        if connectingSceneSession.role == .windowApplication {
+            configuration.delegateClass = SceneDelegate.self
+        }
+        return configuration
     }
 }
