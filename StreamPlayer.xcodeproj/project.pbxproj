@@ -14,6 +14,7 @@
 		72F6CFF72BC4585000D2FA69 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72F6CFF62BC4585000D2FA69 /* Preview Assets.xcassets */; };
 		72F6CFFE2BC5546F00D2FA69 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6CFFD2BC5546E00D2FA69 /* String+Extensions.swift */; };
 		72F6D00A2BC579A000D2FA69 /* StreamEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6D0092BC579A000D2FA69 /* StreamEditView.swift */; };
+		72F6D0262BCAD80700D2FA69 /* StreamPlayerEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6D0252BCAD80600D2FA69 /* StreamPlayerEngine.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		72F6CFF62BC4585000D2FA69 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		72F6CFFD2BC5546E00D2FA69 /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		72F6D0092BC579A000D2FA69 /* StreamEditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamEditView.swift; sourceTree = "<group>"; };
+		72F6D0252BCAD80600D2FA69 /* StreamPlayerEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamPlayerEngine.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				72F6CFEC2BC4584D00D2FA69 /* StreamPlayerApp.swift */,
 				72F6CFEE2BC4584D00D2FA69 /* ContentView.swift */,
 				72F6D0092BC579A000D2FA69 /* StreamEditView.swift */,
+				72F6D0252BCAD80600D2FA69 /* StreamPlayerEngine.swift */,
 				72F6CFFD2BC5546E00D2FA69 /* String+Extensions.swift */,
 				72F6CFF02BC4584D00D2FA69 /* Stream.swift */,
 				72F6CFF22BC4585000D2FA69 /* Assets.xcassets */,
@@ -150,6 +153,7 @@
 			files = (
 				72F6CFFE2BC5546F00D2FA69 /* String+Extensions.swift in Sources */,
 				72F6D00A2BC579A000D2FA69 /* StreamEditView.swift in Sources */,
+				72F6D0262BCAD80700D2FA69 /* StreamPlayerEngine.swift in Sources */,
 				72F6CFEF2BC4584D00D2FA69 /* ContentView.swift in Sources */,
 				72F6CFF12BC4584D00D2FA69 /* Stream.swift in Sources */,
 				72F6CFED2BC4584D00D2FA69 /* StreamPlayerApp.swift in Sources */,

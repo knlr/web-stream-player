@@ -10,7 +10,7 @@ import SwiftData
 
 @main
 struct StreamPlayerApp: App {
-    var sharedModelContainer: ModelContainer = {
+    @State var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Stream.self
         ])

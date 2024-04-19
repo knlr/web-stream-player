@@ -9,10 +9,12 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
+    
     @Environment(\.modelContext) private var modelContext
     @State private var newStreamAlertIsBeingPresented = false
     @Query private var streams: [Stream]
-
+    @StateObject private var streamPlayerEngine = StreamPlayerEngine()
+    
     var body: some View {
         NavigationStack {
             List {
@@ -23,6 +25,27 @@ struct ContentView: View {
                         Text(stream.name)
                         Spacer()
                     }
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        
+                        streamPlayerEngine.play(stream: stream)
+//                        if editMode.isEditing == true {
+//                            editingStreamIndex = streams.firstIndex(where: { $0 == stream })
+//                            streamEditAlertIsBeingPresented = true
+//                        }
+//                        else {
+//                            selection = stream
+//                            onStreamSelected(stream: stream)
+//                        }
+                    }
+                }
+                .onDelete { indexSet in
+                    for index in indexSet {
+                        modelContext.delete(streams[index])
+                    }
+                }
+                .onMove { indexSet, index in
+                    
                 }
             }
             .toolbar {
@@ -63,6 +86,39 @@ struct ContentView: View {
                 }
 #endif
             }
+            
+            if let currentlyPlaying = streamPlayerEngine.currentStream, streamPlayerEngine.state != .stopped {
+                
+                Text("now playing: \(currentlyPlaying.name)").padding([.top], 10)
+                HStack {
+                    if streams.count > 1 {
+                        Button(action: {
+                            streamPlayerEngine.skipBackward()
+                        }, label: {
+                            Image(systemName: "backward")
+                        })
+                        .frame(minHeight: 44)
+                    }
+                    
+                    Button(action:  {
+                        streamPlayerEngine.playPauseToggle()
+                    }, label: {
+                        Image(systemName: streamPlayerEngine.state == .playing ? "pause" : "play")
+                    })
+                    .frame(minHeight: 44)
+                    if streams.count > 1 {
+                        Button(action: {
+                            streamPlayerEngine.skipForward()
+                        }, label: {
+                            Image(systemName: "forward")
+                        })
+                        .frame(minHeight: 44)
+                    }
+                }.padding([.bottom], 20)
+            }
+        }
+        .onAppear() {
+            streamPlayerEngine.modelContext = modelContext
         }
 //        NavigationSplitView {
 //            List {
