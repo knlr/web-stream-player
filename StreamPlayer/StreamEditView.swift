@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct StreamEditView : View {
     
@@ -13,11 +14,18 @@ struct StreamEditView : View {
     @State internal var name: String = ""
     @State internal var url: String = ""
     @State internal var actionLabel: String = ""
-    
+    @Query private var streamList: [StreamList]
+
     var body : some View {
         
         TextField("Name", text: $name)
         TextField("URL", text: $url)
+        
+
+        Button(role: .cancel, action : {},
+               label: {
+            Text("Cancel")
+        })
         
         Button (action: {
             if let url = URL(string: url), !name.isEmpty {
@@ -25,11 +33,13 @@ struct StreamEditView : View {
             }
         }, label: {
             Text(actionLabel)
-        })
-        Button(action : {},
-               label: {
-            Text("Cancel")
-        })
+        }).disabled(okButtonDisabled)
+    }
+    
+    
+    private var okButtonDisabled: Bool {
+        
+        return !url.isValidWebURL || streamList[0].streams.contains(where: { $0.url.absoluteString == url})
     }
 }
 
